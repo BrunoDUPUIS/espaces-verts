@@ -362,3 +362,119 @@ copyright {
     font-size: 2rem;
   }
 }
+
+/* ======================================
+   CORRECTION GALAXY S7 / PETITS ÉCRANS
+====================================== */
+
+@media (max-width: 380px) {
+  /* HERO */
+
+  .hero {
+    min-height: 100svh;
+    height: auto;
+  }
+
+  .overlay {
+    padding: 80px 18px 60px 18px;
+
+    justify-content: center;
+  }
+
+  .hero h1 {
+    font-size: 1.9rem;
+    line-height: 1.2;
+
+    max-width: 100%;
+    word-break: break-word;
+  }
+
+  .hero p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+
+    max-width: 100%;
+  }
+
+  /* BOUTONS */
+
+  .hero-buttons {
+    width: 100%;
+    gap: 15px;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 15px;
+
+    font-size: 0.95rem;
+  }
+
+  /* BANDEAU DÉFILANT */
+
+  .top-banner {
+    padding: 10px 0;
+  }
+
+  .scrolling-text {
+    font-size: 0.82rem;
+  }
+
+  /* SERVICES */
+
+  .cards {
+    gap: 18px;
+  }
+
+  .card {
+    padding: 20px;
+  }
+
+  /* TITRES */
+
+  h2 {
+    font-size: 1.7rem;
+  }
+
+  /* FORMULAIRE */
+
+  input,
+  textarea,
+  button {
+    font-size: 16px;
+  }
+
+  /* MAP */
+
+  .map-container iframe {
+    height: 260px;
+  }
+}
+
+/* ======================================
+   ÉVITE LE DÉBORDEMENT HORIZONTAL
+====================================== */
+
+html,
+body {
+  overflow-x: hidden;
+}
+
+/* ======================================
+   IMAGES RESPONSIVE
+====================================== */
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ======================================
+   BOUTONS TACTILES
+====================================== */
+
+button,
+.btn {
+  min-height: 48px;
+}

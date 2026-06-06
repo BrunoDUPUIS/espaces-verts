@@ -8,13 +8,8 @@
       <div class="card">🌾 Débroussaillage</div>
       <div class="card">🪵 Sciage d’arbres tombés</div>
       <div class="card">🔥 Fendage de bois</div>
-      <div class="card">🚛 Évacuation des déchets</div>
+      <div class="card">🚛 Évacuation déchets</div>
       <div class="card">🌱 Entretien complet jardin</div>
-
-      <!-- duplication pour effet boucle fluide -->
-      <div class="card">🌿 Tonte de pelouse</div>
-      <div class="card">🌳 Taille de haies</div>
-      <div class="card">🌾 Débroussaillage</div>
     </div>
   </section>
 </template>
@@ -25,15 +20,20 @@ import { onMounted, ref } from 'vue'
 const track = ref(null)
 
 onMounted(() => {
-  let speed = 0.5 // 🔥 vitesse lente (plus petit = plus lent)
+  const isMobile = window.innerWidth < 768
+
+  // ❌ STOP auto-scroll sur mobile (important)
+  if (isMobile) return
+
+  let speed = 0.4
 
   const animate = () => {
     if (!track.value) return
 
     track.value.scrollLeft += speed
 
-    // boucle infinie propre
-    if (track.value.scrollLeft >= track.value.scrollWidth / 2) {
+    // boucle fluide
+    if (track.value.scrollLeft >= track.value.scrollWidth - track.value.clientWidth) {
       track.value.scrollLeft = 0
     }
 
@@ -49,68 +49,88 @@ onMounted(() => {
   padding: 80px 20px;
   background: #f5f7f5;
   text-align: center;
+  overflow: hidden;
 }
 
 .services-track {
   margin-top: 40px;
   display: flex;
-  gap: 20px;
+  gap: 16px;
 
-  overflow-x: hidden;
-  scroll-behavior: smooth;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+
+  padding-bottom: 10px;
+}
+
+/* cache scrollbar */
+.services-track::-webkit-scrollbar {
+  display: none;
 }
 
 .card {
   flex: 0 0 auto;
-  min-width: 220px;
+
+  /* 🔥 RESPONSIVE CLEAN */
+  width: clamp(180px, 60vw, 240px);
 
   background: white;
-  padding: 30px 20px;
-  border-radius: 18px;
+  padding: 25px 18px;
+  border-radius: 16px;
 
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
 
   font-weight: 600;
-  font-size: 1rem;
+
+  scroll-snap-align: start;
 
   border-left: 4px solid #2e7d32;
 
-  transition: transform 0.3s ease;
+  transition: transform 0.25s ease;
 }
 
 .card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-5px);
 }
 
-/* effet fade sur les bords (pro) */
-.services {
-  position: relative;
+/* effet fade desktop uniquement */
+@media (min-width: 768px) {
+  .services {
+    position: relative;
+  }
+
+  .services::before,
+  .services::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 80px;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .services::before {
+    left: 0;
+    background: linear-gradient(to right, #f5f7f5, transparent);
+  }
+
+  .services::after {
+    right: 0;
+    background: linear-gradient(to left, #f5f7f5, transparent);
+  }
 }
 
-.services::before,
-.services::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  width: 80px;
-  height: 100%;
-  z-index: 2;
-  pointer-events: none;
-}
-
-.services::before {
-  left: 0;
-  background: linear-gradient(to right, #f5f7f5, transparent);
-}
-
-.services::after {
-  right: 0;
-  background: linear-gradient(to left, #f5f7f5, transparent);
-}
-
+/* mobile optimisation */
 @media (max-width: 768px) {
+  .services-track {
+    gap: 12px;
+    padding-left: 10px;
+  }
+
   .card {
-    min-width: 200px;
+    width: 70%;
   }
 }
 </style>

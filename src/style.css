@@ -362,34 +362,3 @@ copyright {
     font-size: 2rem;
   }
 }
-
-/* =========================
-   PETITS SMARTPHONES
-========================= */
-
-@media (max-width: 480px) {
-  .hero h1 {
-    font-size: 1.8rem;
-  }
-
-  .hero p {
-    font-size: 0.95rem;
-  }
-
-  .scrolling-text {
-    font-size: 0.9rem;
-  }
-
-  .btn {
-    padding: 14px 20px;
-    font-size: 0.95rem;
-  }
-
-  h2 {
-    font-size: 1.7rem;
-  }
-
-  .card {
-    padding: 20px;
-  }
-}

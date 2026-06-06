@@ -1,4 +1,3 @@
-```vue
 <template>
   <div class="site">
     <!-- BANDEAU DÉFILANT -->
@@ -151,4 +150,3 @@ const sendForm = () => {
   alert('Votre demande a bien été envoyée !')
 }
 </script>
-```
